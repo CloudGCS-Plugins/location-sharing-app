@@ -1,0 +1,92 @@
+{
+ "actions": [
+  {
+   "action": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.test",
+   "action_type": "Server Action",
+   "label": "Start"
+  }
+ ],
+ "allow_rename": 1,
+ "autoname": "format:{aircraft_name}-{####}",
+ "creation": "2025-03-07 09:53:48.884653",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_cdgx",
+  "aircraft_name",
+  "is_active",
+  "section_break_ab0t",
+  "user_email",
+  "last_coordinate"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_cdgx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "aircraft_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Aircraft Name",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "read_only": 1
+  },
+  {
+   "fieldname": "user_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "User Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ab0t",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "last_coordinate",
+   "fieldtype": "Geolocation",
+   "label": "Last Coordinate"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-09 15:53:25.408306",
+ "modified_by": "Administrator",
+ "module": "Location Sharing App",
+ "name": "Aircraft",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Basic User",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
