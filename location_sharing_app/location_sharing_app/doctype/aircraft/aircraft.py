@@ -124,22 +124,3 @@ def get_aircraft_by_name(*args, **kwargs):
     if not aircraft:
         frappe.throw("Aircraft not found")
     return aircraft
-
-
-@frappe.whitelist()
-def test():
-    frappe_server_url = "http://localhost:8000"
-    endpoint = "/api/method/start_location_sharing"
-    payload = {"aircraft_name": "Test", "latitude": 53, "longitude": 13}
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": "token 6b9b7359220e4b7:b51075e49724a58",
-    }
-    response = requests.post(
-        f"{frappe_server_url}{endpoint}", headers=headers, json=payload
-    )
-    if response.status_code == 200:
-        print(response.json())
-    else:
-        print("Error")
-    pass

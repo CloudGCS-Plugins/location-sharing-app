@@ -1,11 +1,5 @@
 {
- "actions": [
-  {
-   "action": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.test",
-   "action_type": "Server Action",
-   "label": "Start"
-  }
- ],
+ "actions": [],
  "allow_rename": 1,
  "autoname": "format:{aircraft_name}-{####}",
  "creation": "2025-03-07 09:53:48.884653",
@@ -59,7 +53,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-09 15:53:25.408306",
+ "modified": "2025-03-10 10:53:31.094209",
  "modified_by": "Administrator",
  "module": "Location Sharing App",
  "name": "Aircraft",
