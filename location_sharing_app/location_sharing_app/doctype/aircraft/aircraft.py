@@ -6,7 +6,7 @@ import requests
 class Aircraft(Document):
 
     def validate(self):
-        aircrafts = get_user_aircrafts(self.aircraft_name, self.user_email)
+        aircrafts = get_user_aircrafts()
         if aircrafts:
             for aircraft in aircrafts:
                 if aircraft.is_active and self.is_active and aircraft.name != self.name:
@@ -53,7 +53,7 @@ def get_aircraft_doc_by_name(aircraft_name):
     return doc
 
 
-def get_user_aircrafts(aircraft_name, user_email):
+def get_user_aircrafts():
     user = get_current_user_doc()
     user_email = user.email
     aircrafts = frappe.get_all(
@@ -94,6 +94,8 @@ def stop_location_sharing(*args, **kwargs):
     model = kwargs
     aircraft_name = model.get("aircraft_name")
     aircraft = get_aircraft_doc_by_name(aircraft_name)
+    if not aircraft:
+        frappe.throw("Aircraft not found")
     aircraft.is_active = 0
     try:
         aircraft.save()
