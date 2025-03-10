@@ -1,0 +1,43 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"w2gJOEoc5x\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>Main</b></span>\",\"col\":12}},{\"id\":\"K-pQ8M08_e\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Aircraft\",\"col\":12}},{\"id\":\"W7GS1M69Wa\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Aircraft Locations\",\"col\":12}}]",
+ "creation": "2025-03-10 14:24:27.891913",
+ "custom_blocks": [
+  {
+   "custom_block_name": "Aircraft Locations",
+   "label": "Aircraft Locations"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "both",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Main",
+ "links": [],
+ "modified": "2025-03-10 14:25:52.260992",
+ "modified_by": "Administrator",
+ "module": "Location Sharing App",
+ "name": "Main",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 29.0,
+ "shortcuts": [
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Aircraft",
+   "link_to": "Aircraft",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Main"
+}
