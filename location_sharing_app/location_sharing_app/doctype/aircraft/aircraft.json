@@ -10,6 +10,7 @@
   "section_break_cdgx",
   "aircraft_name",
   "is_active",
+  "aircraft_owner",
   "section_break_ab0t",
   "user_email",
   "last_coordinate"
@@ -49,11 +50,18 @@
    "fieldname": "last_coordinate",
    "fieldtype": "Geolocation",
    "label": "Last Coordinate"
+  },
+  {
+   "fieldname": "aircraft_owner",
+   "fieldtype": "Link",
+   "label": "Aircraft Owner",
+   "options": "User",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-10 10:53:31.094209",
+ "modified": "2025-03-11 12:45:22.206744",
  "modified_by": "Administrator",
  "module": "Location Sharing App",
  "name": "Aircraft",

@@ -1,7 +1,6 @@
 import frappe
 import json
 from frappe.model.document import Document
-import requests
 
 class Aircraft(Document):
 
@@ -22,15 +21,21 @@ class Aircraft(Document):
 
     def before_save(self):
         user = get_current_user_doc()
-        self.user_email = user.email
+        self.aircraft_owner = user.email
 
+
+def has_role(user_data, param):
+    for role in user_data.get("roles"):
+        if role["role"] == param:
+            return True
+    return False
 
 def get_aircraft_query(user):
-    # if not user or user == "Administrator":
-    #     return ""
+    user_data = frappe.get_doc("User", user).as_dict()
+    if has_role(user_data, "System Manager"):
+        return ""
 
-    # This ensures users only see Aircraft they created
-    return f"""(`tabAircraft`.owner = '{user}')"""
+    return f"""(`tabAircraft`.aircraft_owner = '{user}')"""
 
 
 def get_current_user_doc():
@@ -40,11 +45,10 @@ def get_current_user_doc():
 
 
 def get_aircraft_doc_by_name(aircraft_name):
-    user = get_current_user_doc()
-    user_email = user.email
+    aircraft_owner = get_current_user_doc()
     aircrafts = frappe.get_all(
         "Aircraft",
-        filters={"aircraft_name": aircraft_name, "user_email": user_email},
+        filters={"aircraft_name": aircraft_name, "aircraft_owner": aircraft_owner.email},
         fields=["name", "aircraft_name", "is_active", "last_coordinate"],
     )
     if not aircrafts:
@@ -54,11 +58,10 @@ def get_aircraft_doc_by_name(aircraft_name):
 
 
 def get_user_aircrafts():
-    user = get_current_user_doc()
-    user_email = user.email
+    aircraft_owner = get_current_user_doc()
     aircrafts = frappe.get_all(
         "Aircraft",
-        filters={"user_email": user_email},
+        filters={"aircraft_owner": aircraft_owner.email},
         fields=["name", "aircraft_name", "is_active", "last_coordinate"],
     )
     return aircrafts
@@ -114,11 +117,10 @@ def get_aircrafts(*args, **kwargs):
 def get_aircraft_by_name(*args, **kwargs):
     model = kwargs
     aircraft_name = model.get("aircraft_name")
-    user = get_current_user_doc()
-    user_email = user.email
+    aircraft_owner = get_current_user_doc()
     aircraft = frappe.get_all(
         "Aircraft",
-        filters={"aircraft_name": aircraft_name, "user_email": user_email},
+        filters={"aircraft_name": aircraft_name, "aircraft_owner": aircraft_owner.email},
         fields=["name", "aircraft_name", "is_active", "last_coordinate"],
     )
     if not aircraft:
