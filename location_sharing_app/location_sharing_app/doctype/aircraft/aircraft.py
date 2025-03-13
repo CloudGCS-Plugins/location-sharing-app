@@ -66,6 +66,14 @@ def get_user_aircrafts():
     )
     return aircrafts
 
+def create_aircraft_log(aircraft_name,location):
+    aircraft_log = frappe.new_doc("Aircraft Log")
+    aircraft_log.aircraft = aircraft_name
+    aircraft_log.altitude = location.get("properties").get("altitude")
+    aircraft_log.coordinate = json.dumps(location)
+    aircraft_log.save()
+    pass
+
 
 @frappe.whitelist()
 def start_location_sharing(*args, **kwargs):
@@ -77,7 +85,9 @@ def start_location_sharing(*args, **kwargs):
     aircraft.is_active = 1
     location = {
         "type": "Feature",
-        "properties": {},
+        "properties": {
+            "altitude": model.get("altitude")
+        },
         "geometry": {
             "coordinates": [model.get("longitude"), model.get("latitude")],
             "type": "Point",
@@ -86,6 +96,8 @@ def start_location_sharing(*args, **kwargs):
     aircraft.last_coordinate = json.dumps(location)
     try:
         aircraft.save()
+        create_aircraft_log(aircraft.name,location)
+        frappe.db.commit()
         return True
     except Exception as e:
         print(e)

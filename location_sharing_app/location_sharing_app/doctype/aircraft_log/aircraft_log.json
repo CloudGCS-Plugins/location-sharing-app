@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{aircraft}-{YY}{MM}-{####}",
+ "creation": "2025-03-13 12:48:31.817910",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "aircraft",
+  "coordinate",
+  "altitude"
+ ],
+ "fields": [
+  {
+   "fieldname": "aircraft",
+   "fieldtype": "Link",
+   "label": "Aircraft",
+   "options": "Aircraft"
+  },
+  {
+   "fieldname": "coordinate",
+   "fieldtype": "Geolocation",
+   "label": "Coordinate"
+  },
+  {
+   "fieldname": "altitude",
+   "fieldtype": "Data",
+   "label": "Altitude"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-13 13:31:35.774270",
+ "modified_by": "Administrator",
+ "module": "Location Sharing App",
+ "name": "Aircraft Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "role": "Basic User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
