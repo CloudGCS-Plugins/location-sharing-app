@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{aircraft_name}-{####}",
+ "autoname": "format:Aircraft-{####}",
  "creation": "2025-03-07 09:53:48.884653",
  "default_view": "List",
  "doctype": "DocType",
@@ -12,7 +12,6 @@
   "is_active",
   "aircraft_owner",
   "section_break_ab0t",
-  "user_email",
   "last_coordinate"
  ],
  "fields": [
@@ -35,13 +34,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "user_email",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "User Email",
-   "read_only": 1
-  },
-  {
    "fieldname": "section_break_ab0t",
    "fieldtype": "Section Break",
    "hidden": 1
@@ -61,7 +53,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-11 12:45:22.206744",
+ "modified": "2025-03-18 14:53:32.339590",
  "modified_by": "Administrator",
  "module": "Location Sharing App",
  "name": "Aircraft",

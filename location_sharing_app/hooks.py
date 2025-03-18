@@ -185,6 +185,9 @@ override_whitelisted_methods = {
     "start_location_sharing": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.start_location_sharing",
     "login_site": "location_sharing_app.location_sharing_app.services.auth_service.login_site",
     "register_site": "location_sharing_app.location_sharing_app.services.auth_service.register_site",
+    "create_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.create_aircraft",
+    "update_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.update_aircraft",
+    "bulk_aircraft_log_insert": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.bulk_aircraft_log_insert",
 }
 #
 # each overriding function accepts a `data` argument;

@@ -24,7 +24,7 @@ def login_site(*args, **kwargs):
 def register_site(*args, **kwargs):
     model = kwargs
     email = model.get("email")
-    first_name = model.get("first_name")
+    first_name = model.get("full_name")
     password = model.get("password")
 
     try:

@@ -8,7 +8,8 @@
  "field_order": [
   "aircraft",
   "coordinate",
-  "altitude"
+  "altitude",
+  "timestamp"
  ],
  "fields": [
   {
@@ -26,11 +27,16 @@
    "fieldname": "altitude",
    "fieldtype": "Data",
    "label": "Altitude"
+  },
+  {
+   "fieldname": "timestamp",
+   "fieldtype": "Data",
+   "label": "Timestamp"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-13 13:31:35.774270",
+ "modified": "2025-03-18 15:35:30.890157",
  "modified_by": "Administrator",
  "module": "Location Sharing App",
  "name": "Aircraft Log",

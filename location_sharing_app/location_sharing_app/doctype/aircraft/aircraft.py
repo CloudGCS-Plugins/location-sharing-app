@@ -44,11 +44,11 @@ def get_current_user_doc():
     return user
 
 
-def get_aircraft_doc_by_name(aircraft_name):
+def get_aircraft_doc_by_name(aircraft_doc_name):
     aircraft_owner = get_current_user_doc()
     aircrafts = frappe.get_all(
         "Aircraft",
-        filters={"aircraft_name": aircraft_name, "aircraft_owner": aircraft_owner.email},
+        filters={"name": aircraft_doc_name, "aircraft_owner": aircraft_owner.email},
         fields=["name", "aircraft_name", "is_active", "last_coordinate"],
     )
     if not aircrafts:
@@ -66,20 +66,23 @@ def get_user_aircrafts():
     )
     return aircrafts
 
-def create_aircraft_log(aircraft_name,location):
+
+def create_aircraft_log(aircraft_doc_name, location, timestamp):
     aircraft_log = frappe.new_doc("Aircraft Log")
-    aircraft_log.aircraft = aircraft_name
+    aircraft_log.aircraft = aircraft_doc_name
     aircraft_log.altitude = location.get("properties").get("altitude")
     aircraft_log.coordinate = json.dumps(location)
+    aircraft_log.timestamp = timestamp
     aircraft_log.save()
+    frappe.db.commit()
     pass
 
 
 @frappe.whitelist()
 def start_location_sharing(*args, **kwargs):
     model = kwargs
-    aircraft_name = model.get("aircraft_name")
-    aircraft = get_aircraft_doc_by_name(aircraft_name)
+    name = model.get("name")
+    aircraft = get_aircraft_doc_by_name(name)
     if not aircraft:
         frappe.throw("Aircraft not found")
     aircraft.is_active = 1
@@ -96,7 +99,7 @@ def start_location_sharing(*args, **kwargs):
     aircraft.last_coordinate = json.dumps(location)
     try:
         aircraft.save()
-        create_aircraft_log(aircraft.name,location)
+        create_aircraft_log(aircraft.name, location, model.get("timestamp"))
         frappe.db.commit()
         return True
     except Exception as e:
@@ -107,13 +110,14 @@ def start_location_sharing(*args, **kwargs):
 @frappe.whitelist()
 def stop_location_sharing(*args, **kwargs):
     model = kwargs
-    aircraft_name = model.get("aircraft_name")
-    aircraft = get_aircraft_doc_by_name(aircraft_name)
+    aircraft_doc_name = model.get("name")
+    aircraft = get_aircraft_doc_by_name(aircraft_doc_name)
     if not aircraft:
         frappe.throw("Aircraft not found")
     aircraft.is_active = 0
     try:
         aircraft.save()
+        frappe.db.commit()
         return True
     except Exception as e:
         print(e)
@@ -128,13 +132,66 @@ def get_aircrafts(*args, **kwargs):
 @frappe.whitelist()
 def get_aircraft_by_name(*args, **kwargs):
     model = kwargs
-    aircraft_name = model.get("aircraft_name")
+    name = model.get("name")
     aircraft_owner = get_current_user_doc()
     aircraft = frappe.get_all(
         "Aircraft",
-        filters={"aircraft_name": aircraft_name, "aircraft_owner": aircraft_owner.email},
+        filters={"name": name, "aircraft_owner": aircraft_owner.email},
         fields=["name", "aircraft_name", "is_active", "last_coordinate"],
     )
     if not aircraft:
         frappe.throw("Aircraft not found")
     return aircraft
+
+
+@frappe.whitelist()
+def create_aircraft(*args, **kwargs):
+    model = kwargs
+    try:
+        aircraft = frappe.new_doc("Aircraft")
+        aircraft.aircraft_name = model.get("aircraft_name")
+        aircraft.save()
+        frappe.db.commit()
+        return True
+    except Exception as e:
+        return False
+
+
+@frappe.whitelist()
+def update_aircraft(*args, **kwargs):
+    model = kwargs
+    aircraft = get_aircraft_doc_by_name(model.get("name"))
+    if not aircraft:
+        frappe.throw("Aircraft not found")
+    aircraft.aircraft_name = model.get("new_aircraft_name")
+    try:
+        aircraft.save()
+        frappe.db.commit()
+        return True
+    except Exception as e:
+        return False
+
+
+@frappe.whitelist()
+def bulk_aircraft_log_insert(*args, **kwargs):
+    try:
+        model = kwargs
+        aircraft_logs = model.get("aircraft_logs")
+        for aircraft_log in aircraft_logs:
+            location = {
+                "type": "Feature",
+                "properties": {"altitude": aircraft_log.get("altitude")},
+                "geometry": {
+                    "coordinates": [
+                        aircraft_log.get("longitude"),
+                        aircraft_log.get("latitude"),
+                    ],
+                    "type": "Point",
+                },
+            }
+            create_aircraft_log(
+                aircraft_log.get("name"), location, aircraft_log.get("timestamp")
+            )
+        return True
+    except Exception as e:
+        return False
