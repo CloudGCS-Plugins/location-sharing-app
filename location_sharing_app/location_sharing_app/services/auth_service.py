@@ -20,6 +20,24 @@ def login_site(*args, **kwargs):
     }
 
 
+@frappe.whitelist()
+def disable_user_account(*args, **kwargs):
+    user = frappe.session.user
+    frappe.enqueue(disable_user_account_helper, user=user)
+    return {"message": "User account disable request has been enqueued."}
+
+
+def disable_user_account_helper(user):
+    try:
+        user_doc = frappe.get_doc("User", user)
+        user_doc.enabled = 0
+        user_doc.save(ignore_permissions=True)
+        frappe.db.commit()
+        return {"message": "User account disabled successfully."}
+    except Exception as e:
+        return {"error": "User account could not be disabled successfully."}
+
+
 @frappe.whitelist(allow_guest=True)
 def register_site(*args, **kwargs):
     model = kwargs

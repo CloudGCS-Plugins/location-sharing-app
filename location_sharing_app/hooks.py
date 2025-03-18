@@ -186,6 +186,7 @@ override_whitelisted_methods = {
     "create_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.create_aircraft",
     "update_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.update_aircraft",
     "bulk_aircraft_log_insert": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.bulk_aircraft_log_insert",
+    "disable_user_account": "location_sharing_app.location_sharing_app.services.auth_service.disable_user_account",
 }
 #
 # each overriding function accepts a `data` argument;
