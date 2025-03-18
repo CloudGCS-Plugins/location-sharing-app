@@ -178,19 +178,13 @@ permission_query_conditions = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-
-#     "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.get_aircrafts": "get_aircrafts",
-#     "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.get_aircraft_by_name": "get_aircraft_by_name",
-#     "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.start_location_sharing": "start_location_sharing",
-#     "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.stop_location_sharing": "stop_location_sharing",
-# }
 override_whitelisted_methods = {
     "get_aircrafts": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.get_aircrafts",
     "get_aircraft_by_name": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.get_aircraft_by_name",
     "stop_location_sharing": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.stop_location_sharing",
     "start_location_sharing": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.start_location_sharing",
     "login_site": "location_sharing_app.location_sharing_app.services.auth_service.login_site",
+    "register_site": "location_sharing_app.location_sharing_app.services.auth_service.register_site",
 }
 #
 # each overriding function accepts a `data` argument;
