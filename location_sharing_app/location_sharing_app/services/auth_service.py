@@ -68,4 +68,5 @@ def register_site(*args, **kwargs):
             "email": user.email,
         }
     except Exception as e:
-        return {"error": "User could not be created. Please try again."}
+        frappe.throw("User could not be created. Please try again.")
+        print(e)
