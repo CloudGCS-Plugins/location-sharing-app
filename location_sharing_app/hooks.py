@@ -185,7 +185,7 @@ override_whitelisted_methods = {
     "register_site": "location_sharing_app.location_sharing_app.services.auth_service.register_site",
     "create_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.create_aircraft",
     "update_aircraft": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.update_aircraft",
-    "bulk_aircraft_log_insert": "location_sharing_app.location_sharing_app.doctype.aircraft.aircraft.bulk_aircraft_log_insert",
+    "bulk_aircraft_log_insert": "location_sharing_app.location_sharing_app.doctype.aircraft_log.aircraft_log.bulk_aircraft_log_insert",
     "disable_user_account": "location_sharing_app.location_sharing_app.services.auth_service.disable_user_account",
 }
 #
